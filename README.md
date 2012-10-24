@@ -8,6 +8,16 @@ TESTING
 
 This application utilizes the Salesforce streaming API to recieve SFDC Account updates and route them to a simple SOAP service.
 
+- Importing this example project into Mule Studio
+
+1) Clone this git repoistory to a local directory
+
+2) From Mule Studio complete the following steps:
+	- File > IMPORT
+	- Select "Mule > Mule Studio Project from External Location" (click Next)
+	- Project Root select local directory from step (1)
+	- Click "Finish"
+
 - Configure Salesforce streaming Topic:
 To test this application it is neccessary to create a SFDC streaming topic to do this complete the following steps:
 
