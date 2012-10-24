@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="AccountUpdateService" targetNamespace="http://examples.mulesoft.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://examples.mulesoft.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://examples.mulesoft.com/" xmlns:tns="http://examples.mulesoft.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="updateAccount" type="tns:updateAccount"/>
+<xs:element name="updateAccountResponse" type="tns:updateAccountResponse"/>
+<xs:complexType name="updateAccount">
+<xs:sequence>
+<xs:element minOccurs="0" name="accountNameId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="updateAccountResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="Exception" type="tns:Exception"/>
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="updateAccountResponse">
+    <wsdl:part element="tns:updateAccountResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAccount">
+    <wsdl:part element="tns:updateAccount" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part element="tns:Exception" name="Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AccountUpdate">
+    <wsdl:operation name="updateAccount">
+      <wsdl:input message="tns:updateAccount" name="updateAccount">
+    </wsdl:input>
+      <wsdl:output message="tns:updateAccountResponse" name="updateAccountResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccountUpdateServiceSoapBinding" type="tns:AccountUpdate">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateAccount">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateAccount">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AccountUpdateService">
+    <wsdl:port binding="tns:AccountUpdateServiceSoapBinding" name="AccountUpdatePort">
+      <soap:address location="http://localhost:8081/accountUpdate"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

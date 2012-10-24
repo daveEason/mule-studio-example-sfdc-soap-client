@@ -45,21 +45,22 @@
             <property value="3" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mule-sfdc-streaming-to-soapClientFlow" entity-id="6ebfd7d0-5b5f-416e-8e5d-98db8bcf4b7b">
+    <flow SubFlow="false" name="mule-sfdc-streaming-to-soapClientFlow" entity-id="cae576e2-d69b-40c0-ae0d-c64978f4b474">
         <properties>
-            <property value="#[map-payload:Id]" name="id"/>
-            <property value="" name="processingStrategy2"/>
-            <property value="" name="bussinessEventsLabel"/>
-            <property value="false" name="tracking:enable-default-events"/>
-            <property value="true" name="auxiliary;erased;processingStrategy2"/>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
             <property value="4" name="auxiliary;index"/>
-            <property name="updated"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;1396451694">
-                <property value="#[map-payload:Id]" name="id"/>
-                <property value="14" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="4" name="auxiliary;index"/>
+            <property value="4" name="auxiliary;index"/>
+            <property value="4" name="auxiliary;index"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;0">
+                <property value="#[payload['Id']]" name="id"/>
+                <property value="6" name="auxiliary;wrapIn"/>
+                <property value="6" name="auxiliary;index"/>
             </property-collection>
         </properties>
-        <description></description>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
             <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/sfdc/endpoint" name="Salesforce (Streaming)" entity-id="Salesforce (Streaming)#1">
                 <properties>
@@ -83,27 +84,27 @@
                     <property value="SFDC acount update (Id = #[payload['Id']]) received" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
-                    <property value="6" name="auxiliary;index"/>
-                    <property value="6" name="auxiliary;index"/>
-                    <property value="6" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/ee/tracking/custom-event" name="Account Update event" entity-id="Custom business event#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/ee/tracking/custom-event" name="Register received update event" entity-id="Custom business event#1">
                 <properties>
-                    <property value="SFDC account update" name="event-name"/>
-                    <property value="7" name="auxiliary;index"/>
-                    <property value="7" name="auxiliary;index"/>
-                    <property value="7" name="auxiliary;index"/>
+                    <property value="SFDC account update received" name="event-name"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
+                    <property value="8" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/meta-data;0">
-                        <property value="#[map-payload:Name]" name="value"/>
-                        <property value="8" name="auxiliary;wrapIn"/>
-                        <property value="8" name="auxiliary;index"/>
+                        <property value="#[payload['Name']]" name="value"/>
+                        <property value="9" name="auxiliary;wrapIn"/>
+                        <property value="9" name="auxiliary;index"/>
                         <property value="Account Name" name="key"/>
                     </property-collection>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/meta-data;1">
-                        <property value="#[map-payload:Id]" name="value"/>
-                        <property value="9" name="auxiliary;wrapIn"/>
-                        <property value="9" name="auxiliary;index"/>
+                        <property value="#[payload['Id']]" name="value"/>
+                        <property value="10" name="auxiliary;wrapIn"/>
+                        <property value="10" name="auxiliary;index"/>
                         <property value="Account Id" name="key"/>
                     </property-collection>
                 </properties>
@@ -113,101 +114,101 @@
                     <property value="TransformMessage" name="config-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property value="TransformMessage" name="config-ref"/>
-                    <property value="10" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
                     <property name="input-ref"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
                 </properties>
             </pattern>
             <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="Set Payload" entity-id="Set Payload#1">
                 <properties>
-                    <property value="#[map-payload:Name_Id]" name="value"/>
-                    <property value="11" name="auxiliary;index"/>
-                    <property value="11" name="auxiliary;index"/>
-                    <property value="11" name="auxiliary;index"/>
+                    <property value="#[payload['Name_Id']]" name="value"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP Client Request" entity-id="SOAP#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP Client request" entity-id="SOAP#1">
                 <properties>
                     <property name="configuration-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property name="configuration-ref"/>
-                    <property value="12" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
                     <property value="updateAccount" name="operation"/>
-                    <property value="com.mulesoft.examples.SimpleAccountUpdateService" name="serviceClass"/>
+                    <property value="com.mulesoft.example.AccountUpdate" name="serviceClass"/>
                     <property name="decoupledEndpoint"/>
-                    <property value="12" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
                     <property name="clientClass"/>
                     <property name="port"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
                     <property name="mtomEnabled"/>
                     <property name="wsdlLocation"/>
-                    <property name="enableMuleSoapHeaders"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
-                    <property value="12" name="auxiliary;index"/>
+                    <property value="true" name="enableMuleSoapHeaders"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
                 </properties>
             </pattern>
             <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="SimpleAccountUpdateRequest" entity-id="HTTP#1">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property name="httpLabel"/>
                     <property value="localhost" name="host"/>
                     <property value="${http.port}" name="port"/>
                     <property value="accountUpdate" name="path"/>
                     <property name="method"/>
-                    <property value="13" name="auxiliary;index"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
                     <property name="followRedirects"/>
-                    <property value="13" name="auxiliary;index"/>
-                    <property value="13" name="auxiliary;index"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
-                    <property value="13" name="auxiliary;index"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property name="user"/>
                     <property name="password"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                     <property name="contentType"/>
                     <property name="keep-alive"/>
-                    <property value="13" name="auxiliary;index"/>
-                    <property value="13" name="auxiliary;index"/>
-                    <property value="13" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
+                    <property value="14" name="auxiliary;index"/>
                 </properties>
             </endpoint>
             <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="Catch Exception Strategy#1">
@@ -223,7 +224,7 @@
                     <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
                         <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Log Exception" entity-id="Logger#2">
                             <properties>
-<property value="An exception has occurred while processing SFDC account Id= #[map-payload:Id]" name="message"/>
+<property value="An exception has occurred while processing SFDC account Id= #[payload['Id']]" name="message"/>
 <property value="ERROR" name="level"/>
 <property name="category"/>
 <property value="16" name="auxiliary;index"/>
@@ -252,170 +253,6 @@
     <property value="#[payload]" name="ref"/>
     <property value="18" name="auxiliary;wrapIn"/>
     <property value="18" name="auxiliary;index"/>
-    <property value="true" name="isProcessed$$$$"/>
-</property-collection>
-                            </properties>
-                        </pattern>
-                    </lane>
-                </compartment>
-            </scope>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="mule-simple-soap-serviceFlow" entity-id="dec91bc0-a0ae-4e57-a885-c956d519d33f">
-        <properties>
-            <property value="" name="processingStrategy2"/>
-            <property value="" name="bussinessEventsLabel"/>
-            <property value="false" name="tracking:enable-default-events"/>
-            <property value="true" name="auxiliary;erased;processingStrategy2"/>
-            <property value="19" name="auxiliary;index"/>
-            <property name="updated"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;1889894986"/>
-        </properties>
-        <description></description>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#2">
-                <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property name="httpLabel"/>
-                    <property value="localhost" name="host"/>
-                    <property value="${http.port}" name="port"/>
-                    <property value="accountUpdate" name="path"/>
-                    <property name="method"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property name="address"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="responseTimeout"/>
-                    <property name="followRedirects"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property name="connector-ref"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="responseTransformer-refs"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property name="user"/>
-                    <property name="password"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property name="contentType"/>
-                    <property name="keep-alive"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                </properties>
-            </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP Service Interface" entity-id="SOAP#2">
-                <properties>
-                    <property name="configuration-ref"/>
-                    <property value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-                    <property name="configuration-ref"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property name="bindingId"/>
-                    <property name="port"/>
-                    <property name="namespace"/>
-                    <property name="service"/>
-                    <property name="onException"/>
-                    <property value="com.mulesoft.examples.SimpleAccountUpdateService" name="serviceClass"/>
-                    <property name="validationEnabled"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property name="mtomEnabled"/>
-                    <property name="wsdlLocation"/>
-                    <property name="enableMuleSoapHeaders"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                    <property value="21" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="AccountUpdateSOAPImpl" entity-id="Java#1">
-                <properties>
-                    <property value="22" name="auxiliary;index"/>
-                    <property value="22" name="auxiliary;index"/>
-                    <property value="22" name="auxiliary;index"/>
-                    <property value="com.mulesoft.examples.SimpleAccountUpdateServiceSOAPImpl" name="class"/>
-                    <property value="22" name="auxiliary;index"/>
-                    <property value="22" name="auxiliary;index"/>
-                    <property value="22" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Account update processed" entity-id="Logger#3">
-                <properties>
-                    <property value="#[message.payload], processing complete" name="message"/>
-                    <property value="INFO" name="level"/>
-                    <property name="category"/>
-                    <property value="23" name="auxiliary;index"/>
-                    <property value="23" name="auxiliary;index"/>
-                    <property value="23" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="Catch Exception Strategy#2">
-                <properties>
-                    <property name="labelConfigureConditionalExecutionUsingExpression"/>
-                    <property name="when"/>
-                    <property name="enableNotifications"/>
-                    <property value="24" name="auxiliary;index"/>
-                    <property value="24" name="auxiliary;index"/>
-                    <property value="24" name="auxiliary;index"/>
-                </properties>
-                <compartment entity-id="compartment#2">
-                    <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Log Exception" entity-id="Logger#4">
-                            <properties>
-<property value="An exception has occurred while processing SFDC account Id= #[map-payload:Id]" name="message"/>
-<property value="ERROR" name="level"/>
-<property name="category"/>
-<property value="25" name="auxiliary;index"/>
-<property value="25" name="auxiliary;index"/>
-<property value="25" name="auxiliary;index"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/cloudhub/cloudhub-connector" name="Cloudhub exception notification" entity-id="Cloudhub#3">
-                            <properties>
-<property value="Cloudhub" name="config-ref"/>
-<property value="http://www.mulesoft.org/schema/mule/cloudhub/create-notification" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-<property value="Cloudhub" name="config-ref"/>
-<property value="26" name="auxiliary;index"/>
-<property name="domain"/>
-<property value="An exception has occurred while processing a message" name="message"/>
-<property name="payload-ref"/>
-<property value="ERROR" name="priority"/>
-<property value="26" name="auxiliary;index"/>
-<property value="26" name="auxiliary;index"/>
-<property value="26" name="auxiliary;index"/>
-<property value="26" name="auxiliary;index"/>
-<property value="26" name="auxiliary;index"/>
-<property value="26" name="auxiliary;index"/>
-<property value="26" name="auxiliary;index"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/cloudhub/create-notification-custom-propertiess;0">
-    <property value="#[payload]" name="ref"/>
-    <property value="27" name="auxiliary;wrapIn"/>
-    <property value="27" name="auxiliary;index"/>
-    <property value="true" name="isProcessed$$$$"/>
 </property-collection>
                             </properties>
                         </pattern>

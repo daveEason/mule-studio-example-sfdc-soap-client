@@ -14,30 +14,18 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     <cloudhub:config name="Cloudhub" url="https://cloudhub.io/ " username="${ch.user.name}${ch.user.pwd}" password="${ch.user.pwd}" doc:name="Cloudhub"/>
     <flow name="mule-sfdc-streaming-to-soapClientFlow" doc:name="mule-sfdc-streaming-to-soapClientFlow">
         <sfdc:subscribe-topic config-ref="Salesforce_Config" topic="/BasicAccountUpdates" doc:name="Salesforce (Streaming)"/>
+		<tracking:transaction id="#[payload['Id']]"/>
         <logger message="SFDC acount update (Id = #[payload['Id']]) received" level="INFO" doc:name="Account update received"/>
-        <tracking:custom-event event-name="SFDC account update" doc:name="Account Update event">
-            <tracking:meta-data key="Account Name" value="#[map-payload:Name]"/>
-            <tracking:meta-data key="Account Id" value="#[map-payload:Id]"/>
+        <tracking:custom-event event-name="SFDC account update received" doc:name="Register received update event">
+            <tracking:meta-data key="Account Name" value="#[payload['Name']]"/>
+            <tracking:meta-data key="Account Id" value="#[payload['Id']]"/>
         </tracking:custom-event>
         <data-mapper:transform config-ref="TransformMessage" doc:name="DataMapper"/>
-        <set-payload value="#[map-payload:Name_Id]" doc:name="Set Payload"/>
-        <cxf:jaxws-client operation="updateAccount" serviceClass="com.mulesoft.examples.SimpleAccountUpdateService" doc:name="SOAP Client Request"/>
+        <set-payload value="#[payload['Name_Id']]" doc:name="Set Payload"/>
+        <cxf:jaxws-client operation="updateAccount" serviceClass="com.mulesoft.example.AccountUpdate" enableMuleSoapHeaders="true" doc:name="SOAP Client request"/>
         <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="${http.port}" path="accountUpdate" doc:name="SimpleAccountUpdateRequest"/>
-        <tracking:transaction id="#[map-payload:Id]"/>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
-            <logger message="An exception has occurred while processing SFDC account Id= #[map-payload:Id]" level="ERROR" doc:name="Log Exception"/>
-            <cloudhub:create-notification config-ref="Cloudhub" message="An exception has occurred while processing a message" priority="ERROR" doc:name="Cloudhub exception notification">
-                <cloudhub:custom-properties ref="#[payload]"/>
-            </cloudhub:create-notification>
-        </catch-exception-strategy>
-    </flow>
-    <flow name="mule-simple-soap-serviceFlow" doc:name="mule-simple-soap-serviceFlow">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${http.port}" path="accountUpdate" doc:name="HTTP"/>
-        <cxf:jaxws-service serviceClass="com.mulesoft.examples.SimpleAccountUpdateService" doc:name="SOAP Service Interface"/>
-        <component class="com.mulesoft.examples.SimpleAccountUpdateServiceSOAPImpl" doc:name="AccountUpdateSOAPImpl"/>
-        <logger message="#[message.payload], processing complete" level="INFO" doc:name="Account update processed"/>
-        <catch-exception-strategy doc:name="Catch Exception Strategy">
-            <logger message="An exception has occurred while processing SFDC account Id= #[map-payload:Id]" level="ERROR" doc:name="Log Exception"/>
+            <logger message="An exception has occurred while processing SFDC account Id= #[payload['Id']]" level="ERROR" doc:name="Log Exception"/>
             <cloudhub:create-notification config-ref="Cloudhub" message="An exception has occurred while processing a message" priority="ERROR" doc:name="Cloudhub exception notification">
                 <cloudhub:custom-properties ref="#[payload]"/>
             </cloudhub:create-notification>
