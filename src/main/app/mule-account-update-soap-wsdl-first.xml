@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
-	xmlns:cloudhub="http://www.mulesoft.org/schema/mule/cloudhub" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+	xmlns:cloudhub="http://www.mulesoft.org/schema/mule/cloudhub" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
 http://www.mulesoft.org/schema/mule/cloudhub http://www.mulesoft.org/schema/mule/cloudhub/1.0/mule-cloudhub.xsd 
@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <logger message="#[message.payload], processing complete" level="INFO" doc:name="Account update processed"/>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <logger message="An exception has occurred while processing SFDC account update: #[message.payload]" level="ERROR" doc:name="Log Exception"/>
-            <cloudhub:create-notification config-ref="Cloudhub" message="An exception has occurred while processing a message" priority="ERROR" doc:name="Cloudhub">
+            <cloudhub:create-notification config-ref="Cloudhub" message="An exception has occurred while processing a message" priority="ERROR" domain="salesforce-2-account-update" doc:name="Cloudhub">
                 <cloudhub:custom-properties ref="#[payload]"/>
             </cloudhub:create-notification>        
         </catch-exception-strategy>

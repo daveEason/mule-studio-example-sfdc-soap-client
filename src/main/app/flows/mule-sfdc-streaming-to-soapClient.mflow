@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-sfdc-streaming-to-soapClient">
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-poc-intuit-sfdc">
     <global-element type="http://www.mulesoft.org/schema/mule/sfdc/config" name="Salesforce" entity-id="Salesforce#1">
         <properties>
             <property value="Salesforce_Config" name="name"/>
@@ -14,12 +14,7 @@
             <property name="proxyPassword"/>
             <property value="1" name="auxiliary;index"/>
             <property name="timeObjectStore-ref"/>
-            <property name="assignmentRuleId"/>
             <property name="clientId"/>
-            <property name="allowFieldTruncationSupport"/>
-            <property name="useDefaultRule"/>
-            <property value="1" name="auxiliary;index"/>
-            <property value="1" name="auxiliary;index"/>
             <property value="1" name="auxiliary;index"/>
             <property value="1" name="auxiliary;index"/>
             <property value="1" name="auxiliary;index"/>
@@ -50,7 +45,7 @@
             <property value="3" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mule-sfdc-streaming-to-soapClientFlow" entity-id="152602f1-6216-42e7-9381-38daa5eb83f9">
+    <flow SubFlow="false" name="mule-sfdc-streaming-to-soapClientFlow" entity-id="cae576e2-d69b-40c0-ae0d-c64978f4b474">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -239,30 +234,32 @@
                         </pattern>
                         <pattern type="http://www.mulesoft.org/schema/mule/cloudhub/cloudhub-connector" name="Cloudhub exception notification" entity-id="Cloudhub#2">
                             <properties>
-<property value="An exception has occurred while processing a message" name="message"/>
-<property value="#[payload]" name="ref"/>
-<property value="" name="payload-ref"/>
-<property value="" name="xLabel"/>
-<property value="ERROR" name="priority"/>
-<property value="salesforce-2-account-update" name="domain"/>
+<property value="Cloudhub" name="config-ref"/>
 <property value="http://www.mulesoft.org/schema/mule/cloudhub/create-notification" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-<property value="false" name="none"/>
 <property value="Cloudhub" name="config-ref"/>
 <property value="17" name="auxiliary;index"/>
-<property name="updated"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/cloudhub/create-notification-custom-propertiess;1">
+<property name="domain"/>
+<property value="An exception has occurred while processing a message" name="message"/>
+<property name="payload-ref"/>
+<property value="ERROR" name="priority"/>
+<property value="17" name="auxiliary;index"/>
+<property value="17" name="auxiliary;index"/>
+<property value="17" name="auxiliary;index"/>
+<property value="17" name="auxiliary;index"/>
+<property value="17" name="auxiliary;index"/>
+<property value="17" name="auxiliary;index"/>
+<property value="17" name="auxiliary;index"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/cloudhub/create-notification-custom-propertiess;0">
     <property value="#[payload]" name="ref"/>
-    <property value="" name="xLabel"/>
-    <property value="false" name="none"/>
+    <property value="18" name="auxiliary;wrapIn"/>
     <property value="18" name="auxiliary;index"/>
-    <property value="true" name="isProcessed$$$$"/>
 </property-collection>
                             </properties>
-                            <description></description>
                         </pattern>
                     </lane>
                 </compartment>
             </scope>
         </lane>
     </flow>
+    <description></description>
 </mule-configuration>

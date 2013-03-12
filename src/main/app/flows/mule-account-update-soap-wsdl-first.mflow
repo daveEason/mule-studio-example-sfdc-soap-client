@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-account-update-soap-wsdl-first">
-    <flow SubFlow="false" name="mule-account-update-soap-wsdl-firstFlow1" entity-id="55bef4e5-43e3-45b4-b310-09b563647e09">
+    <flow SubFlow="false" name="mule-account-update-soap-wsdl-firstFlow1" entity-id="067f0c3a-a151-487a-8a77-0b17608939cf">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -126,30 +126,26 @@
                         <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Log Exception" entity-id="Logger#2">
                             <properties>
 <property value="An exception has occurred while processing SFDC account update: #[message.payload]" name="message"/>
+<property value="" name="category"/>
 <property value="ERROR" name="level"/>
-<property name="category"/>
 <property value="7" name="auxiliary;index"/>
-<property value="7" name="auxiliary;index"/>
-<property value="7" name="auxiliary;index"/>
+<property name="updated"/>
                             </properties>
+                            <description></description>
                         </pattern>
                         <pattern type="http://www.mulesoft.org/schema/mule/cloudhub/cloudhub-connector" name="Cloudhub" entity-id="Cloudhub#1">
                             <properties>
 <property value="An exception has occurred while processing a message" name="message"/>
 <property value="#[payload]" name="ref"/>
 <property value="" name="payload-ref"/>
-<property value="" name="xLabel"/>
 <property value="ERROR" name="priority"/>
-<property value="salesforce-2-account-update" name="domain"/>
+<property value="" name="domain"/>
 <property value="http://www.mulesoft.org/schema/mule/cloudhub/create-notification" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-<property value="false" name="none"/>
 <property value="Cloudhub" name="config-ref"/>
 <property value="8" name="auxiliary;index"/>
 <property name="updated"/>
 <property-collection name="@http://www.mulesoft.org/schema/mule/cloudhub/create-notification-custom-propertiess;1">
     <property value="#[payload]" name="ref"/>
-    <property value="" name="xLabel"/>
-    <property value="false" name="none"/>
     <property value="9" name="auxiliary;index"/>
     <property value="true" name="isProcessed$$$$"/>
 </property-collection>
@@ -161,4 +157,5 @@
             </scope>
         </lane>
     </flow>
+    <description></description>
 </mule-configuration>
